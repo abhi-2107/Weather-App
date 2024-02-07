@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./components/Header/Header";
+import MainWeather from "./components/leftcard/MainWeather";
 import getWeather from "./api/getWeatherAxios";
 import getCurrentLocation from "./utils/getLocation";
 import Layout from "./layout/Layout";
+import dayIcon from "./assets/icons/animated/day.svg";
 
 function App() {
   const [currenLocation, setCurrenLocation] = useState({
@@ -11,16 +12,20 @@ function App() {
     longitude: 30,
   });
   const [weatherInfo, setWeatherInfo] = useState(null);
+  const [weatherInfoLoaded, setWeatherInfoLoaded] = useState(false);
 
   useEffect(() => {
     getCurrentLocation()
       .then((location) => {
         setCurrenLocation(location);
         if (location) {
-          getWeather(location.latitude, location.longitude).then((data) => {
-            setWeatherInfo(data);
-            console.log(data);
-          });
+          getWeather(location.latitude, location.longitude).then(
+            (axiosResponse) => {
+              setWeatherInfo(axiosResponse.data);
+              setWeatherInfoLoaded(true);
+              // console.log(data);
+            }
+          );
         } else {
           console.error("location not available yet ");
         }
@@ -31,14 +36,31 @@ function App() {
         console.error("error getting location", error.message);
       });
   }, []);
+  console.log(weatherInfo);
   return (
-    <div className="h-screen bg-cover  bg-center bg-gradient-to-tr from-sky-600 to-sky-400">
-      <Layout>
-        <div className="border">
-          <Header />
+    <div className="h-screen bg-cover  bg-gradient-to-tr from-sky-600 to-sky-400">
+      {weatherInfoLoaded ? (
+        <Layout>
+          <div className="">
+            <MainWeather
+              Tcurr={weatherInfo.current.temperature_2m}
+              Tmax={weatherInfo.daily.temperature_2m_max[0]}
+              Tmin={weatherInfo.daily.temperature_2m_min[0]}
+              Tappr={weatherInfo.current.apparent_temperature}
+              humidity={weatherInfo.current.relative_humidity_2m}
+              rain={weatherInfo.current.rain}
+              windSpeed={weatherInfo.current.wind_speed_10m}
+              windDir={weatherInfo.current.wind_direction_10m}
+            />
+          </div>
+          <div className="border sm:col-span-2">right section</div>
+        </Layout>
+      ) : (
+        <div className="flex justify-center items-center h-screen ">
+          {" "}
+          <img src={dayIcon} alt="day-icon-loading" className="w-52 h-auto" />
         </div>
-        <div className="border sm:col-span-2">right section</div>
-      </Layout>
+      )}
     </div>
   );
 }
