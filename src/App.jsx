@@ -3,7 +3,6 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import getWeather from "./api/getWeatherAxios";
 import getCurrentLocation from "./utils/getLocation";
-import morningImage from "./assets/morning-weather.jpg";
 import Layout from "./layout/Layout";
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
       });
   }, []);
   return (
-    <div className="h-screen bg-cover  bg-center" style={{backgroundImage: `url(${morningImage})`}}>
+    <div className="h-screen bg-cover  bg-center bg-gradient-to-tr from-sky-600 to-sky-400">
       <Layout>
         <div className="border">
           <Header />
