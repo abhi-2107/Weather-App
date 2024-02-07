@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function Layout({children}) {
+function Layout({ children }) {
   return (
-    <div className="p-10 grid sm:grid-cols-3 gap-4   h-full text-white">
-    {children}
-  </div>
-  )
+    <div className="p-2 sm:p-10  grid sm:grid-cols-3 gap-4   h-full text-white">
+      {children}
+    </div>
+  );
 }
 
-export default Layout
+export default Layout;

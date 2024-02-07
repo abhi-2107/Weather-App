@@ -53,12 +53,20 @@ function App() {
               windDir={weatherInfo.current.wind_direction_10m}
             />
           </div>
-          <div className="border sm:col-span-2">right section</div>
+          <div className="border sm:col-span-2">Coming Soon...</div>
         </Layout>
       ) : (
-        <div className="flex justify-center items-center h-screen ">
+        <div className="flex flex-col justify-center items-center h-screen ">
           {" "}
-          <img src={dayIcon} alt="day-icon-loading" className="w-52 h-auto" />
+          <img
+            src={dayIcon}
+            alt="day-icon-loading"
+            className="w-52 h-auto block"
+          />
+          <p className="text-xl sm:text-2xl p-5 text-slate-200 text-center">
+            Please turn on the location and refresh the page if this page
+            persist !
+          </p>
         </div>
       )}
     </div>
