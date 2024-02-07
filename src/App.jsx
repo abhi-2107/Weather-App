@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import Header from "./components/Header/Header";
+import getWeather from "./api/getWeatherAxios";
+import getCurrentLocation from "./utils/getLocation";
+import morningImage from "./assets/morning-weather.jpg";
+import Layout from "./layout/Layout";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currenLocation, setCurrenLocation] = useState({
+    latitude: 20,
+    longitude: 30,
+  });
+  const [weatherInfo, setWeatherInfo] = useState(null);
 
+  useEffect(() => {
+    getCurrentLocation()
+      .then((location) => {
+        setCurrenLocation(location);
+        if (location) {
+          getWeather(location.latitude, location.longitude).then((data) => {
+            setWeatherInfo(data);
+            console.log(data);
+          });
+        } else {
+          console.error("location not available yet ");
+        }
+        return location;
+      })
+
+      .catch((error) => {
+        console.error("error getting location", error.message);
+      });
+  }, []);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="h-screen bg-cover  bg-center" style={{backgroundImage: `url(${morningImage})`}}>
+      <Layout>
+        <div className="border">
+          <Header />
+        </div>
+        <div className="border sm:col-span-2">right section</div>
+      </Layout>
+    </div>
+  );
 }
 
-export default App
+export default App;
