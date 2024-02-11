@@ -5,6 +5,15 @@ import getWeather from "./api/getWeatherAxios";
 import getCurrentLocation from "./utils/getLocation";
 import Layout from "./layout/Layout";
 import dayIcon from "./assets/icons/animated/day.svg";
+import { locations } from "./api/locations";
+import Select from "react-select";
+const options = locations.map((city) => ({
+  value: city.id,
+  label: city.capital,
+  longitude: city.longitude,
+  latitude: city.latitude,
+}));
+console.log(options);
 
 function App() {
   const [currenLocation, setCurrenLocation] = useState({
@@ -13,7 +22,7 @@ function App() {
   });
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [weatherInfoLoaded, setWeatherInfoLoaded] = useState(false);
-
+  const [city, setCity] = useState(null);
   useEffect(() => {
     getCurrentLocation()
       .then((location) => {
@@ -36,13 +45,33 @@ function App() {
         console.error("error getting location", error.message);
       });
   }, []);
-  console.log(weatherInfo);
+  // function handleLocation(searchLocation) {
+  //   setCurrenLocation(searchLocation);
+  //   getWeather(searchLocation.latitude, searchLocation.longitude).then(
+  //     (axiosResponse) => setWeatherInfo(axiosResponse.data)
+  //   );
+  // }
+  console.log(currenLocation, weatherInfo);
   return (
     <div className="h-screen bg-cover  bg-gradient-to-tr from-sky-600 to-sky-400">
       {weatherInfoLoaded ? (
         <Layout>
-          <div className="">
+          <div>
+            <Select
+              options={options}
+              className="text-black"
+              value={city}
+              onChange={(city) => {
+                setCity(city);
+                setCurrenLocation(city);
+                getWeather(city.latitude, city.longitude).then(
+                  (axiosResponse) => setWeatherInfo(axiosResponse.data)
+                );
+                console.log(city);
+              }}
+            />
             <MainWeather
+              location={city === null ? "Current location" : city.label}
               Tcurr={weatherInfo.current.temperature_2m}
               Tmax={weatherInfo.daily.temperature_2m_max[0]}
               Tmin={weatherInfo.daily.temperature_2m_min[0]}
