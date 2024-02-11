@@ -82,7 +82,6 @@ function App() {
               windDir={weatherInfo.current.wind_direction_10m}
             />
           </div>
-          <div className="border sm:col-span-2">Coming Soon...</div>
         </Layout>
       ) : (
         <div className="flex flex-col justify-center items-center h-screen ">
