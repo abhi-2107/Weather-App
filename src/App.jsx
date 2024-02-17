@@ -45,59 +45,70 @@ function App() {
         console.error("error getting location", error.message);
       });
   }, []);
-  // function handleLocation(searchLocation) {
-  //   setCurrenLocation(searchLocation);
-  //   getWeather(searchLocation.latitude, searchLocation.longitude).then(
-  //     (axiosResponse) => setWeatherInfo(axiosResponse.data)
-  //   );
-  // }
+  
   console.log(currenLocation, weatherInfo);
   return (
-    <div className="h-screen bg-cover  bg-gradient-to-tr from-sky-600 to-sky-400">
+    <>
       {weatherInfoLoaded ? (
-        <Layout>
-          <div>
-            <Select
-              options={options}
-              className="text-black"
-              value={city}
-              onChange={(city) => {
-                setCity(city);
-                setCurrenLocation(city);
-                getWeather(city.latitude, city.longitude).then(
-                  (axiosResponse) => setWeatherInfo(axiosResponse.data)
-                );
-                console.log(city);
-              }}
-            />
-            <MainWeather
-              location={city === null ? "Current location" : city.label}
-              Tcurr={weatherInfo.current.temperature_2m}
-              Tmax={weatherInfo.daily.temperature_2m_max[0]}
-              Tmin={weatherInfo.daily.temperature_2m_min[0]}
-              Tappr={weatherInfo.current.apparent_temperature}
-              humidity={weatherInfo.current.relative_humidity_2m}
-              rain={weatherInfo.current.rain}
-              windSpeed={weatherInfo.current.wind_speed_10m}
-              windDir={weatherInfo.current.wind_direction_10m}
-            />
-          </div>
-        </Layout>
+        <div
+          className={`h-screen bg-cover  bg-gradient-to-tr ${
+            weatherInfo.current.is_day
+              ? "from-sky-500 to-yellow-200"
+              : "from-slate-900 to-slate-500"
+          }`}
+        >
+          <Layout>
+            <div>
+              <MainWeather
+                location={city === null ? "Current location" : city.label}
+                isDay={weatherInfo.current.is_day}
+                // isDay={1}
+                Tcurr={weatherInfo.current.temperature_2m}
+                Tmax={weatherInfo.daily.temperature_2m_max[0]}
+                Tmin={weatherInfo.daily.temperature_2m_min[0]}
+                Tappr={weatherInfo.current.apparent_temperature}
+                humidity={weatherInfo.current.relative_humidity_2m}
+                rain={weatherInfo.current.rain}
+                windSpeed={weatherInfo.current.wind_speed_10m}
+                windDir={weatherInfo.current.wind_direction_10m}
+              >
+                <Select
+                  options={options}
+                  className="text-black "
+                  value={city}
+                  onChange={(city) => {
+                    setCity(city);
+                    setCurrenLocation(city);
+                    getWeather(city.latitude, city.longitude).then(
+                      (axiosResponse) => setWeatherInfo(axiosResponse.data)
+                    );
+                    console.log(city);
+                  }}
+                />
+              </MainWeather>
+            </div>
+          </Layout>
+        </div>
       ) : (
-        <div className="flex flex-col justify-center items-center h-screen ">
-          {" "}
-          <img
-            src={dayIcon}
-            alt="day-icon-loading"
-            className="w-52 h-auto block"
-          />
-          <p className="text-xl sm:text-2xl p-5 text-slate-200 text-center">
-            Please turn on the location and refresh the page if this page
-            persist !
-          </p>
+        <div
+          className="h-screen bg-cover  bg-gradient-to-tr 
+              from-sky-600 to-sky-400"
+        >
+          <div className="flex flex-col justify-center items-center h-screen ">
+            {" "}
+            <img
+              src={dayIcon}
+              alt="day-icon-loading"
+              className="w-52 h-auto block"
+            />
+            <p className="text-xl sm:text-2xl p-5 text-slate-200 text-center">
+              Please turn on the location and refresh the page if this page
+              persist !
+            </p>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
