@@ -15,15 +15,11 @@ function MainWeather({
 }) {
   console.log(isDay);
   return (
-    <div
-      className={`flex p-5 flex-col ${
-        isDay ? " bg-sky-600" : "bg-gradient-to-b from-gray-700 to-zinc-900"
-      }  rounded-md`}
-    >
+    <div className={`flex p-2 flex-col  border  rounded-md `}>
       {children}
       <div className="text-center">
         <p className=" mx-3 text-4xl font-bold mt-5 ">{location}</p>
-        <p className="text-8xl mt-10">
+        <p className="text-7xl mt-10 mb-5">
           {Tcurr}
           <sup className="font-light">&deg;C</sup>
         </p>
@@ -34,10 +30,10 @@ function MainWeather({
           <span className="text-lg">&darr; {Tmin}&deg;C</span>
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-6   m-2 text-center">
+      <div className="grid grid-cols-2 gap-4   m-2 text-center">
         <div
-          className={`p-3  bg-opacity-35 rounded ${
-            isDay ? "bg-sky-300" : "bg-zinc-400"
+          className={`p-3  bg-opacity-35 border  rounded-xl ${
+            isDay ? "bg-sky-300" : ""
           }`}
         >
           <p>
@@ -47,8 +43,8 @@ function MainWeather({
           </p>
         </div>
         <div
-          className={`p-3  bg-opacity-35 rounded ${
-            isDay ? "bg-sky-300" : "bg-zinc-400"
+          className={`p-3  bg-opacity-35 rounded-xl border ${
+            isDay ? "bg-sky-300" : ""
           }`}
         >
           <p>
@@ -57,8 +53,8 @@ function MainWeather({
           </p>
         </div>
         <div
-          className={`p-3  bg-opacity-35 rounded ${
-            isDay ? "bg-sky-300" : "bg-zinc-400"
+          className={`p-3  bg-opacity-35 rounded-xl border ${
+            isDay ? "bg-sky-300" : ""
           }`}
         >
           <p>
@@ -67,8 +63,8 @@ function MainWeather({
           </p>
         </div>
         <div
-          className={`p-3  bg-opacity-35 rounded ${
-            isDay ? "bg-sky-300" : "bg-zinc-400"
+          className={`p-3  bg-opacity-35 rounded-xl border ${
+            isDay ? "bg-sky-300" : ""
           }`}
         >
           <p>

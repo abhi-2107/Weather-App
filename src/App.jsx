@@ -7,6 +7,10 @@ import Layout from "./layout/Layout";
 import dayIcon from "./assets/icons/animated/day.svg";
 import { locations } from "./api/locations";
 import Select from "react-select";
+import BgDay from "./assets/bg_day.jpg";
+import BgNight from "./assets/bg_night.jpg";
+import vdNight from "./assets/bg_night.mp4";
+
 const options = locations.map((city) => ({
   value: city.id,
   label: city.capital,
@@ -45,18 +49,28 @@ function App() {
         console.error("error getting location", error.message);
       });
   }, []);
-  
+
   console.log(currenLocation, weatherInfo);
   return (
     <>
       {weatherInfoLoaded ? (
         <div
-          className={`h-screen bg-cover  bg-gradient-to-tr ${
-            weatherInfo.current.is_day
-              ? "from-sky-500 to-yellow-200"
-              : "from-slate-900 to-slate-500"
-          }`}
+          className="h-screen bg-cover "
+          // style={{
+          //   backgroundImage: `url(${
+          //     // weatherInfo.current.is_day ? BgDay : BgNight
+          //     0 ? BgDay : BgNight
+          //   })`,
+          //   backgroundSize: "cover",
+          // }}
         >
+          <video
+            src={vdNight}
+            className="absolute -z-10 h-screen min-w-full"
+            loop
+            autoPlay
+          />
+
           <Layout>
             <div>
               <MainWeather
@@ -74,7 +88,7 @@ function App() {
               >
                 <Select
                   options={options}
-                  className="text-black "
+                  className="text-black mt-3"
                   value={city}
                   onChange={(city) => {
                     setCity(city);
@@ -92,7 +106,7 @@ function App() {
       ) : (
         <div
           className="h-screen bg-cover  bg-gradient-to-tr 
-              from-sky-600 to-sky-400"
+              from-blue-900 to-sky-500"
         >
           <div className="flex flex-col justify-center items-center h-screen ">
             {" "}

@@ -252,4 +252,5 @@ const locations = [
     latitude: 22.5726,
   },
 ];
+locations.sort((a, b) => a.capital.localeCompare(b.capital));
 export { locations };
