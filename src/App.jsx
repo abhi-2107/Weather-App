@@ -7,8 +7,7 @@ import Layout from "./layout/Layout";
 import dayIcon from "./assets/icons/animated/day.svg";
 import { locations } from "./api/locations";
 import Select from "react-select";
-import BgDay from "./assets/bg_day.jpg";
-import BgNight from "./assets/bg_night.jpg";
+import vdDay from "./assets/bg_day.mp4";
 import vdNight from "./assets/bg_night.mp4";
 
 const options = locations.map((city) => ({
@@ -65,11 +64,15 @@ function App() {
           // }}
         >
           <video
-            src={vdNight}
-            className="absolute -z-10 h-screen min-w-full"
+            className="fixed w-full h-full object-cover -z-10"
             loop
             autoPlay
-          />
+          >
+            <source
+              src={weatherInfo.current.is_day ? vdDay : vdNight}
+              type="video/mp4"
+            />
+          </video>
 
           <Layout>
             <div>
