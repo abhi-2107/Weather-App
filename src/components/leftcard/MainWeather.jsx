@@ -1,4 +1,6 @@
 import React from "react";
+import sunIcon from "../../assets/icons/animated/day.svg";
+import moonIcon from "../../assets/icons/animated/night.svg";
 
 function MainWeather({
   isDay,
@@ -15,15 +17,20 @@ function MainWeather({
 }) {
   console.log(isDay);
   return (
-    <div className={`flex p-2 flex-col  border  rounded-md `}>
+    <div className={`flex flex-col border  rounded-md `}>
       {children}
       <div className="text-center">
-        <p className=" mx-3 text-4xl font-bold mt-5 ">{location}</p>
-        <p className="text-7xl mt-10 mb-5">
+        <img
+          src={isDay  ? sunIcon : moonIcon}
+          alt="weather icon"
+          className="w-72 h-auto mx-auto"
+        />
+        <p className="text-7xl font-extrabold  mb-5">
           {Tcurr}
           <sup className="font-light">&deg;C</sup>
         </p>
-        <p className="text-lg font-medium">Mainly clear</p>
+        <p className=" mx-3 text-4xl  mt-5 ">{location}</p>
+        {/* <p className="text-lg font-medium">Mainly clear</p> */}
         <p>
           <span className="text-lg">&uarr; {Tmax}&deg;C</span>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

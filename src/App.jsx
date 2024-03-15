@@ -4,11 +4,11 @@ import MainWeather from "./components/leftcard/MainWeather";
 import getWeather from "./api/getWeatherAxios";
 import getCurrentLocation from "./utils/getLocation";
 import Layout from "./layout/Layout";
-import dayIcon from "./assets/icons/animated/day.svg";
+import loadingIcon from "./assets/icons/animated/solar-eclipse.svg";
 import { locations } from "./api/locations";
 import Select from "react-select";
-import vdDay from "./assets/bg_day.mp4";
-import vdNight from "./assets/bg_night.mp4";
+import vdDay from "./assets/videos/bg_day.mp4";
+import vdNight from "./assets/videos/bg_night.mp4";
 
 const options = locations.map((city) => ({
   value: city.id,
@@ -53,23 +53,16 @@ function App() {
   return (
     <>
       {weatherInfoLoaded ? (
-        <div
-          className="h-screen bg-cover "
-          // style={{
-          //   backgroundImage: `url(${
-          //     // weatherInfo.current.is_day ? BgDay : BgNight
-          //     0 ? BgDay : BgNight
-          //   })`,
-          //   backgroundSize: "cover",
-          // }}
-        >
+        <div className="h-screen bg-cover ">
           <video
             className="fixed w-full h-full object-cover -z-10"
+            muted
             loop
             autoPlay
           >
             <source
-              src={weatherInfo.current.is_day ? vdDay : vdNight}
+              // src={weatherInfo.current.is_day ? vdDay : vdNight}
+              src={1 ? vdDay : vdNight}
               type="video/mp4"
             />
           </video>
@@ -77,9 +70,9 @@ function App() {
           <Layout>
             <div>
               <MainWeather
-                location={city === null ? "Current location" : city.label}
-                isDay={weatherInfo.current.is_day}
-                // isDay={1}
+                location={city === null ? "Current Location" : city.label}
+                // isDay={weatherInfo.current.is_day}
+                isDay={1}
                 Tcurr={weatherInfo.current.temperature_2m}
                 Tmax={weatherInfo.daily.temperature_2m_max[0]}
                 Tmin={weatherInfo.daily.temperature_2m_min[0]}
@@ -91,8 +84,9 @@ function App() {
               >
                 <Select
                   options={options}
-                  className="text-black mt-3"
+                  className="text-black "
                   value={city}
+                  placeholder="Select City..."
                   onChange={(city) => {
                     setCity(city);
                     setCurrenLocation(city);
@@ -109,16 +103,16 @@ function App() {
       ) : (
         <div
           className="h-screen bg-cover  bg-gradient-to-tr 
-              from-blue-900 to-sky-500"
+              from-blue-500 to-slate-950"
         >
           <div className="flex flex-col justify-center items-center h-screen ">
             {" "}
             <img
-              src={dayIcon}
+              src={loadingIcon}
               alt="day-icon-loading"
-              className="w-52 h-auto block"
+              className="w-80 h-auto block mb-10"
             />
-            <p className="text-xl sm:text-2xl p-5 text-slate-200 text-center">
+            <p className="text-2xl sm:text-2xl px-5 text-slate-200 text-center">
               Please turn on the location and refresh the page if this page
               persist !
             </p>
