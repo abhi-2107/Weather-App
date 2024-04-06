@@ -46,9 +46,9 @@ function MainWeather({
           </span>
         </p>
         </div>
-      <div className="grid grid-cols-3 gap-y-5  font-bold text-center">
+      <div className="grid grid-cols-2 sm:grid-cols-3 mx-3 gap-x-1 gap-y-3  font-bold text-center">
         <div
-          className={`  bg-opacity-55  border-r py-2  rounded-xl ${
+          className={`  bg-opacity-55  border-x py-2  rounded-xl ${
             isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
@@ -66,7 +66,7 @@ function MainWeather({
           <p className="m-0 text-sm">Wind Speed</p>
         </div>
         <div
-          className={`  bg-opacity-55  border-l  rounded-xl py-2 ${
+          className={`  bg-opacity-55  border-x  rounded-xl py-2 ${
             isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
@@ -80,7 +80,7 @@ function MainWeather({
         </div>
 
         <div
-          className={`  bg-opacity-55  border-r  rounded-xl py-2 ${
+          className={`  bg-opacity-55  border-x  rounded-xl py-2 ${
             isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
@@ -102,7 +102,7 @@ function MainWeather({
           <p className="m-0 text-sm">Wind Direction</p>
         </div>
         <div
-          className={`  bg-opacity-55  border-l  rounded-xl py-2 ${
+          className={`  bg-opacity-55  border-x  rounded-xl py-2 ${
             isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
