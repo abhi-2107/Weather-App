@@ -53,16 +53,17 @@ function App() {
   return (
     <>
       {weatherInfoLoaded ? (
-        <div className="h-screen bg-cover ">
+        <div className="  ">
           <video
             className="fixed w-full h-full object-cover -z-10"
             muted
             loop
             autoPlay
+            playsInline
           >
             <source
-              // src={weatherInfo.current.is_day ? vdDay : vdNight}
-              src={1 ? vdDay : vdNight}
+              src={weatherInfo.current.is_day ? vdDay : vdNight}
+              // src={1 ? vdDay : vdNight}
               type="video/mp4"
             />
           </video>
@@ -71,8 +72,8 @@ function App() {
             <div>
               <MainWeather
                 location={city === null ? "Current Location" : city.label}
-                // isDay={weatherInfo.current.is_day}
-                isDay={1}
+                isDay={weatherInfo.current.is_day}
+                // isDay={1}
                 Tcurr={weatherInfo.current.temperature_2m}
                 Tmax={weatherInfo.daily.temperature_2m_max[0]}
                 Tmin={weatherInfo.daily.temperature_2m_min[0]}

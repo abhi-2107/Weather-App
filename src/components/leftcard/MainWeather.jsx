@@ -1,6 +1,13 @@
 import React from "react";
 import sunIcon from "../../assets/icons/animated/day.svg";
 import moonIcon from "../../assets/icons/animated/night.svg";
+import rainIcon from "../../assets/icons/animated/rain.svg";
+import humidityIcon from "../../assets/icons/animated/humidity.svg";
+import windIcon from "../../assets/icons/animated/windsock.svg";
+import maxIcon from "../../assets/icons/animated/maxtemp.svg";
+import minIcon from "../../assets/icons/animated/mintemp.svg";
+import compassIcon from "../../assets/icons/animated/compass.svg";
+
 
 function MainWeather({
   isDay,
@@ -17,68 +24,95 @@ function MainWeather({
 }) {
   console.log(isDay);
   return (
-    <div className={`flex flex-col border  rounded-md `}>
+    <div className={`flex flex-col   rounded-md `}>
       {children}
       <div className="text-center">
         <img
-          src={isDay  ? sunIcon : moonIcon}
+          src={isDay ? sunIcon : moonIcon}
           alt="weather icon"
-          className="w-72 h-auto mx-auto"
+          className="w-36 h-auto mx-auto my-6 "
         />
-        <p className="text-7xl font-extrabold  mb-5">
+        <p className="text-6xl font-extrabold tracking-wider mb-4">
           {Tcurr}
-          <sup className="font-light">&deg;C</sup>
+          &deg;C
         </p>
-        <p className=" mx-3 text-4xl  mt-5 ">{location}</p>
-        {/* <p className="text-lg font-medium">Mainly clear</p> */}
-        <p>
-          <span className="text-lg">&uarr; {Tmax}&deg;C</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span className="text-lg">&darr; {Tmin}&deg;C</span>
-        </p>
-      </div>
-      <div className="grid grid-cols-2 gap-4   m-2 text-center">
-        <div
-          className={`p-3  bg-opacity-35 border  rounded-xl ${
-            isDay ? "bg-sky-300" : ""
-          }`}
-        >
-          <p>
-            {" "}
-            <span className="text-gray-200">Feels like</span> <br /> {Tappr}
+        <p className=" mb-7 text-xl ">
+          <span className={`px-2 py-1 font-semibold  rounded-md bg-opacity-55 ${isDay ? "bg-blue-600 text-yellow-400" :"bg-slate-500 text-sky-300"} shadow-xl`}>
+            {location}
+          </span>{" "}
+          <span className="text-lg">
+            Feels like {Tappr}
             &deg;C
-          </p>
+          </span>
+        </p>
         </div>
+      <div className="grid grid-cols-3 gap-y-5  font-bold text-center">
         <div
-          className={`p-3  bg-opacity-35 rounded-xl border ${
-            isDay ? "bg-sky-300" : ""
+          className={`  bg-opacity-55  border-r py-2  rounded-xl ${
+            isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
-          <p>
-            {" "}
-            <span className="text-gray-200">Humidity</span> <br /> {humidity} %
-          </p>
+          <img src={rainIcon} alt="rainIcon" className="w-11 inline-block" />
+          <span className="ms-3">{rain} mm</span>
+          <p className="m-0 text-sm">Rain</p>
         </div>
         <div
-          className={`p-3  bg-opacity-35 rounded-xl border ${
-            isDay ? "bg-sky-300" : ""
+          className={`  bg-opacity-55  border-x  rounded-xl py-2 ${
+            isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
-          <p>
-            {" "}
-            <span className="text-gray-200">Rain</span> <br /> {rain} mm
-          </p>
+          <img src={windIcon} alt="rainIcon" className="w-8 inline-block" />
+          <span className="ms-3">{windSpeed}km/h </span>
+          <p className="m-0 text-sm">Wind Speed</p>
         </div>
         <div
-          className={`p-3  bg-opacity-35 rounded-xl border ${
-            isDay ? "bg-sky-300" : ""
+          className={`  bg-opacity-55  border-l  rounded-xl py-2 ${
+            isDay ? "bg-blue-600" : "bg-gray-500"
           }`}
         >
-          <p>
-            {" "}
-            <span className="text-gray-200">Wind speed | Direction</span> <br />
-            {windSpeed}km/h | {windDir}&deg; N
-          </p>
+          <img
+            src={humidityIcon}
+            alt="humidityIcon"
+            className="w-6 inline-block "
+          />
+          <span className="ms-3">{humidity}% </span>
+          <p className="m-0 text-sm">Humidity</p>
+        </div>
+
+        <div
+          className={`  bg-opacity-55  border-r  rounded-xl py-2 ${
+            isDay ? "bg-blue-600" : "bg-gray-500"
+          }`}
+        >
+          <img src={maxIcon} alt="maxtempIcon" className="w-6 inline-block " />
+          <span className="ms-3">{Tmax}&deg;C </span>
+          <p className="m-0 text-sm">Max Temp.</p>
+        </div>
+        <div
+          className={`  bg-opacity-55  border-x  rounded-xl py-2 ${
+            isDay ? "bg-blue-600" : "bg-gray-500"
+          }`}
+        >
+          <img
+            src={compassIcon}
+            alt="humidityIcon"
+            className="w-8 inline-block "
+          />
+          <span className="ms-3">{windDir}&deg;N</span>
+          <p className="m-0 text-sm">Wind Direction</p>
+        </div>
+        <div
+          className={`  bg-opacity-55  border-l  rounded-xl py-2 ${
+            isDay ? "bg-blue-600" : "bg-gray-500"
+          }`}
+        >
+          <img
+            src={minIcon}
+            alt="minimum tempIcon"
+            className="w-6 inline-block "
+          />
+          <span className="ms-3">{Tmin}&deg;C </span>
+          <p className="m-0 text-sm">Min Temp.</p>
         </div>
       </div>
     </div>

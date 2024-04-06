@@ -2,7 +2,7 @@ import React from "react";
 
 function Layout({ children }) {
   return (
-    <div className="font-mono p-2 border max-w-[430px]  grid place-items-center mx-auto  text-white ">
+    <div className="font-mono   max-w-[430px]  p-2  mx-auto  text-white shadow-inner shadow-indigo-800 ">
       {children}
     </div>
   );
