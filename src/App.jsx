@@ -55,8 +55,7 @@ function App() {
       {weatherInfoLoaded ? (
         <div className="  ">
           <video
-          controls
-          playbackRate="0.1"
+
             className="fixed w-full h-full object-cover -z-10"
             muted
             loop
